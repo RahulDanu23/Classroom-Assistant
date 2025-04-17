@@ -364,6 +364,8 @@ input[type="file"]:hover {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .quiz-score, .assignment-score {
@@ -371,14 +373,34 @@ input[type="file"]:hover {
     padding: 5px 10px;
     border-radius: 4px;
     font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
-.quiz-score {
+.performance-table {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.performance-table table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+}
+
+.performance-table th,
+.performance-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.performance-table th {
+    background: #f8f9fa;
+    font-weight: 600;
     color: #1a237e;
-}
-
-.assignment-score {
-    color: #4fc3f7;
 }
 
 /* Profile Section */
@@ -701,6 +723,18 @@ input[type="file"]:hover {
 
     .feedback-summary {
         grid-template-columns: 1fr;
+    }
+
+    .performance-table {
+        margin: 0 -15px;
+    }
+    
+    .performance-table table {
+        min-width: 800px;
+    }
+    
+    .score-details {
+        min-width: 150px;
     }
 }
 
