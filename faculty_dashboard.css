@@ -80,12 +80,14 @@ nav li i {
     bottom: 20px;
     left: 20px;
     right: 20px;
+    margin-top: 20px;
 }
 
 .logout a {
     display: flex;
     align-items: center;
     gap: 10px;
+    width: 18%;
     color: white;
     text-decoration: none;
     padding: 10px 12px;
@@ -588,7 +590,45 @@ input[type="file"]:hover {
 }
 
 @media (max-width: 768px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 10px;
+    }
+
+    .logo {
+        padding: 10px 0;
+        margin-bottom: 15px;
+    }
+
+    nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-bottom: 20px;
+    }
+
+    nav li {
+        flex: 1;
+        min-width: 120px;
+        padding: 8px;
+        margin: 0;
+        text-align: center;
+    }
+
+    .logout {
+        position: relative;
+        margin-top: 30px;
+        text-align: center;
+    }
+
     .main-content {
+        margin-left: 0;
         padding: 15px;
     }
 
@@ -632,9 +672,48 @@ input[type="file"]:hover {
         justify-content: center;
         margin-top: 10px;
     }
+
+    .feedback-filters {
+        flex-direction: column;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .feedback-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .feedback-rating {
+        align-items: flex-start;
+    }
+
+    .feedback-summary {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 480px) {
+    .sidebar {
+        padding: 5px;
+    }
+
+    nav ul {
+        gap: 3px;
+    }
+
+    nav li {
+        min-width: 100px;
+        padding: 6px;
+        font-size: 12px;
+    }
+
+    nav li i {
+        font-size: 14px;
+    }
+
     .main-content {
         padding: 10px;
     }
@@ -691,6 +770,27 @@ input[type="file"]:hover {
 
     .profile-info {
         text-align: center;
+    }
+
+    .feedback-container {
+        padding: 15px;
+    }
+
+    .feedback-item {
+        padding: 15px;
+    }
+
+    .feedback-summary .summary-card {
+        padding: 15px;
+    }
+
+    .feedback-summary .summary-card i {
+        padding: 10px;
+        font-size: 18px;
+    }
+
+    .feedback-summary .summary-content p {
+        font-size: 1.2rem;
     }
 }
 
