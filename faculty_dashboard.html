@@ -23,11 +23,15 @@
                     </li>
                     <li data-section="generate-quiz">
                         <i class="fas fa-question-circle"></i>
-                        <span>Generate Quiz</span>
+                        <span>Quiz</span>
                     </li>
                     <li data-section="student-performance">
                         <i class="fas fa-chart-line"></i>
-                        <span>Student Performance</span>
+                        <span>Performance</span>
+                    </li>
+                    <li data-section="feedback">
+                        <i class="fas fa-comments"></i>
+                        <span>Student Feedback</span>
                     </li>
                     <li data-section="profile">
                         <i class="fas fa-user"></i>
@@ -280,6 +284,134 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Feedback Section -->
+            <section id="feedback" class="content-section">
+                <div class="feedback-container">
+                    <h2>Student Feedback</h2>
+                    
+                    <!-- Feedback Filters -->
+                    <div class="feedback-filters">
+                        <div class="filter-group">
+                            <label>Subject</label>
+                            <select id="feedback-subject">
+                                <option value="all">All Subjects</option>
+                                <option value="math">Mathematics</option>
+                                <option value="science">Science</option>
+                                <option value="english">English</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Rating</label>
+                            <select id="feedback-rating">
+                                <option value="all">All Ratings</option>
+                                <option value="5">5 Stars</option>
+                                <option value="4">4 Stars</option>
+                                <option value="3">3 Stars</option>
+                                <option value="2">2 Stars</option>
+                                <option value="1">1 Star</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Feedback List -->
+                    <div class="feedback-list">
+                        <!-- Feedback Item 1 -->
+                        <div class="feedback-item">
+                            <div class="feedback-header">
+                                <div class="student-info">
+                                    <h3>John Doe</h3>
+                                    <p>Section A1 | Mathematics</p>
+                                </div>
+                                <div class="feedback-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="date">March 15, 2024</span>
+                                </div>
+                            </div>
+                            <div class="feedback-content">
+                                <p>"The teacher explains concepts very clearly and provides helpful examples. The notes are well-organized and easy to understand."</p>
+                            </div>
+                        </div>
+
+                        <!-- Feedback Item 2 -->
+                        <div class="feedback-item">
+                            <div class="feedback-header">
+                                <div class="student-info">
+                                    <h3>Jane Smith</h3>
+                                    <p>Section B2 | Science</p>
+                                </div>
+                                <div class="feedback-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="date">March 14, 2024</span>
+                                </div>
+                            </div>
+                            <div class="feedback-content">
+                                <p>"The practical demonstrations in class are very helpful. Would appreciate more interactive sessions."</p>
+                            </div>
+                        </div>
+
+                        <!-- Feedback Item 3 -->
+                        <div class="feedback-item">
+                            <div class="feedback-header">
+                                <div class="student-info">
+                                    <h3>Mike Johnson</h3>
+                                    <p>Section C1 | English</p>
+                                </div>
+                                <div class="feedback-rating">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="date">March 13, 2024</span>
+                                </div>
+                            </div>
+                            <div class="feedback-content">
+                                <p>"Great teaching methodology. The assignments are challenging but help in better understanding of the subject."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feedback Summary -->
+                    <div class="feedback-summary">
+                        <div class="summary-card">
+                            <i class="fas fa-star"></i>
+                            <div class="summary-content">
+                                <h4>Average Rating</h4>
+                                <p>4.5/5</p>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <i class="fas fa-comment"></i>
+                            <div class="summary-content">
+                                <h4>Total Feedback</h4>
+                                <p>24</p>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <i class="fas fa-chart-pie"></i>
+                            <div class="summary-content">
+                                <h4>Positive Feedback</h4>
+                                <p>85%</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
