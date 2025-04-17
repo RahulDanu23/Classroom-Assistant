@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="student_dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="profile-section">
+                <div class="profile-pic">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="profile-info">
+                    <h3 id="student-name">Student Name</h3>
+                    <p id="student-id">ID: 123456</p>
+                    <p id="student-section">Section: A1</p>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active" data-section="notes">
+                        <i class="fas fa-book"></i>
+                        <span>Notes</span>
+                    </li>
+                    <li data-section="quizzes">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Quizzes</span>
+                    </li>
+                    <li data-section="feedback">
+                        <i class="fas fa-comment-alt"></i>
+                        <span>Feedback</span>
+                    </li>
+                    <li data-section="profile">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Notes Section -->
+            <div class="content-section active" id="notes-section">
+                <div class="section-header">
+                    <h2>Study Notes</h2>
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search notes...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                <div class="notes-grid">
+                    <div class="note-card">
+                        <div class="note-header">
+                            <h3>Mathematics</h3>
+                            <span class="date">Posted: 2 days ago</span>
+                        </div>
+                        <div class="note-content">
+                            <p>Chapter 3: Calculus Basics</p>
+                            <div class="note-actions">
+                                <button class="download-btn">
+                                    <i class="fas fa-download"></i> Download
+                                </button>
+                                <button class="view-btn">
+                                    <i class="fas fa-eye"></i> View
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- More note cards can be added here -->
+                </div>
+            </div>
+
+            <!-- Quizzes Section -->
+            <div class="content-section" id="quizzes-section">
+                <div class="section-header">
+                    <h2>Available Quizzes</h2>
+                </div>
+                <div class="quizzes-grid">
+                    <div class="quiz-card">
+                        <div class="quiz-header">
+                            <h3>Mathematics Quiz</h3>
+                            <span class="status pending">Pending</span>
+                        </div>
+                        <div class="quiz-info">
+                            <p><i class="fas fa-clock"></i> Duration: 30 mins</p>
+                            <p><i class="fas fa-question-circle"></i> 20 Questions</p>
+                            <p><i class="fas fa-calendar"></i> Due: Tomorrow</p>
+                        </div>
+                        <button class="start-quiz-btn">
+                            <i class="fas fa-play"></i> Start Quiz
+                        </button>
+                    </div>
+                    <!-- More quiz cards can be added here -->
+                </div>
+            </div>
+
+            <!-- Feedback Section -->
+            <div class="content-section" id="feedback-section">
+                <div class="section-header">
+                    <h2>Teacher Feedback</h2>
+                </div>
+                <div class="feedback-form">
+                    <div class="form-group">
+                        <label for="teacher-select">Select Teacher</label>
+                        <select id="teacher-select">
+                            <option value="" disabled selected>Choose a teacher</option>
+                            <option value="1">Dr. Smith</option>
+                            <option value="2">Prof. Johnson</option>
+                            <option value="3">Ms. Williams</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="feedback-subject">Subject</label>
+                        <input type="text" id="feedback-subject" placeholder="Enter subject">
+                    </div>
+                    <div class="form-group">
+                        <label for="feedback-message">Your Feedback</label>
+                        <textarea id="feedback-message" placeholder="Write your feedback here..."></textarea>
+                    </div>
+                    <button class="submit-feedback-btn">
+                        <i class="fas fa-paper-plane"></i> Submit Feedback
+                    </button>
+                </div>
+            </div>
+
+            <!-- Profile Section -->
+            <div class="content-section" id="profile-section">
+                <div class="section-header">
+                    <h2>Profile Settings</h2>
+                </div>
+                <div class="profile-form">
+                    <div class="form-group">
+                        <label for="profile-name">Full Name</label>
+                        <input type="text" id="profile-name" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-email">Email</label>
+                        <input type="email" id="profile-email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-password">Change Password</label>
+                        <input type="password" id="profile-password" placeholder="Enter new password">
+                    </div>
+                    <button class="save-profile-btn">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get student data from localStorage (assuming it was stored during login)
+        const studentData = JSON.parse(localStorage.getItem('studentData')) || {
+            name: 'Student Name',
+            id: '123456',
+            section: 'A1',
+            email: 'student@example.com'
+        };
+
+        // Update profile information
+        document.getElementById('student-name').textContent = studentData.name;
+        document.getElementById('student-id').textContent = `ID: ${studentData.id}`;
+        document.getElementById('student-section').textContent = `Section: ${studentData.section}`;
+
+        // Update profile form with current data
+        document.getElementById('profile-name').value = studentData.name;
+        document.getElementById('profile-email').value = studentData.email;
+
+        // Navigation functionality
+        document.querySelectorAll('.sidebar-nav li').forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove active class from all nav items
+                document.querySelectorAll('.sidebar-nav li').forEach(li => li.classList.remove('active'));
+                // Add active class to clicked item
+                this.classList.add('active');
+                
+                // Hide all sections
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show selected section
+                const sectionId = this.getAttribute('data-section') + '-section';
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+
+        // Form submission handlers
+        document.querySelector('.submit-feedback-btn').addEventListener('click', function() {
+            const teacher = document.getElementById('teacher-select').value;
+            const subject = document.getElementById('feedback-subject').value;
+            const message = document.getElementById('feedback-message').value;
+            
+            if (!teacher || !subject || !message) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Here you would typically send the feedback to your backend
+            console.log('Feedback submitted:', { teacher, subject, message });
+            alert('Feedback submitted successfully!');
+        });
+
+        document.querySelector('.save-profile-btn').addEventListener('click', function() {
+            const newName = document.getElementById('profile-name').value;
+            const newEmail = document.getElementById('profile-email').value;
+            const newPassword = document.getElementById('profile-password').value;
+            
+            // Update student data
+            studentData.name = newName;
+            studentData.email = newEmail;
+            
+            // If password is provided, update it
+            if (newPassword) {
+                // Here you would typically update the password in your backend
+                console.log('Password updated');
+            }
+            
+            // Update localStorage
+            localStorage.setItem('studentData', JSON.stringify(studentData));
+            
+            // Update displayed information
+            document.getElementById('student-name').textContent = studentData.name;
+            
+            // Clear password field
+            document.getElementById('profile-password').value = '';
+            
+            alert('Profile changes saved successfully!');
+        });
+
+        // Add logout functionality
+        const logoutBtn = document.createElement('li');
+        logoutBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i><span>Logout</span>';
+        logoutBtn.style.marginTop = '20px';
+        logoutBtn.style.borderTop = '1px solid rgba(255, 255, 255, 0.1)';
+        logoutBtn.style.paddingTop = '20px';
+        logoutBtn.addEventListener('click', function() {
+            // Clear student data from localStorage
+            localStorage.removeItem('studentData');
+            // Redirect to login page
+            window.location.href = 'student_login.html';
+        });
+        document.querySelector('.sidebar-nav ul').appendChild(logoutBtn);
+    </script>
+</body>
+</html> 

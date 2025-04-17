@@ -474,3 +474,38 @@ body {
 .logo i {
     animation: float 3s ease-in-out infinite;
 }
+
+.back-to-home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+}
+
+.back-to-home a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.back-to-home a:hover {
+    background: #667eea;
+    color: white;
+    transform: translateX(-5px);
+}
+
+.back-to-home i {
+    transition: transform 0.3s ease;
+}
+
+.back-to-home a:hover i {
+    transform: translateX(-5px);
+}

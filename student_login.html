@@ -9,6 +9,13 @@
 </head>
 <body>
     <div class="container">
+        <!-- Back to Home Button -->
+        <div class="back-to-home">
+            <a href="index.html">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+        
         <!-- Login Form -->
         <div class="form-container active" id="login-form">
             <div class="logo">
@@ -72,7 +79,54 @@
                         <input type="email" id="reg-email" placeholder="Email Address" required>
                     </div>
                 </div>
-                
+                <div class="form-group">
+                    <div class="input-group">
+                        <i class="fas fa-hashtag"></i>
+                        <input type="text" id="university-roll" placeholder="University Roll Number" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <i class="fas fa-hashtag"></i>
+                        <input type="text" id="class-roll" placeholder="Class Roll Number" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <i class="fas fa-users"></i>
+                        <select id="section" required>
+                            <option value="" disabled selected>Select Section</option>
+                            <option value="A1">A1</option>
+                            <option value="A2">A2</option>
+                            <option value="B1">B1</option>
+                            <option value="B2">B2</option>
+                            <option value="C1">C1</option>
+                            <option value="C2">C2</option>
+                            <option value="D1">D1</option>
+                            <option value="D2">D2</option>
+                            <option value="E1">E1</option>
+                            <option value="E2">E2</option>
+                            <option value="F1">F1</option>
+                            <option value="F2">F2</option>
+                            <option value="G1">G1</option>
+                            <option value="G2">G2</option>
+                            <option value="H1">H1</option>
+                            <option value="H2">H2</option>
+                            <option value="I1">I1</option>
+                            <option value="I2">I2</option>
+                            <option value="J1">J1</option>
+                            <option value="J2">J2</option>
+                            <option value="K1">K1</option>
+                            <option value="K2">K2</option>
+                            <option value="L1">L1</option>
+                            <option value="L2">L2</option>
+                            <option value="M1">M1</option>
+                            <option value="M2">M2</option>
+                            <option value="N1">N1</option>
+                            <option value="N2">N2</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="input-group">
                         <i class="fas fa-lock"></i>
@@ -136,6 +190,18 @@
             
             // Show selected form
             document.getElementById(formId).style.display = 'block';
+            
+            // Reset all password fields when switching forms
+            document.querySelectorAll('input[type="password"]').forEach(input => {
+                input.value = '';
+                input.type = 'password';
+            });
+            
+            // Reset all password toggle icons
+            document.querySelectorAll('.toggle-password').forEach(icon => {
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            });
         }
 
         // Toggle password visibility
@@ -152,13 +218,33 @@
         // Handle form submissions
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Add your login logic here
-            console.log('Login form submitted');
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Here you would typically verify credentials with your backend
+            // For demo purposes, we'll use a mock student data
+            const mockStudentData = {
+                name: 'John Doe',
+                id: '2023001',
+                section: 'A1',
+                email: email
+            };
+            
+            // Store student data in localStorage
+            localStorage.setItem('studentData', JSON.stringify(mockStudentData));
+            
+            // Redirect to dashboard
+            window.location.href = 'student_dashboard.html';
         });
 
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            const fullname = document.getElementById('fullname').value;
+            const email = document.getElementById('reg-email').value;
+            const universityRoll = document.getElementById('university-roll').value;
+            const classRoll = document.getElementById('class-roll').value;
+            const section = document.getElementById('section').value;
             const password = document.getElementById('reg-password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
             
@@ -167,17 +253,34 @@
                 return;
             }
             
-            // Add your registration logic here
-            console.log('Registration form submitted');
+            // Here you would typically send registration data to your backend
+            const studentData = {
+                name: fullname,
+                id: universityRoll,
+                section: section,
+                email: email
+            };
             
-            // Redirect to login page after successful registration
-            showForm('login-form');
+            // Store student data in localStorage
+            localStorage.setItem('studentData', JSON.stringify(studentData));
+            
+            // Redirect to dashboard
+            window.location.href = 'student_dashboard.html';
         });
 
         document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
             e.preventDefault();
             // Add your password reset logic here
             console.log('Forgot password form submitted');
+        });
+
+        // Add event listeners for all navigation links
+        document.querySelectorAll('a[onclick^="showForm"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const formId = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+                showForm(formId);
+            });
         });
     </script>
 </body>

@@ -259,3 +259,87 @@ body {
         padding: 12px 12px 12px 40px;
     }
 }
+
+.input-group select {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 16px;
+    color: #333;
+    background: #f8f9fa;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23667eea' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 15px;
+    padding-right: 40px;
+}
+
+.input-group select:focus {
+    border-color: #667eea;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.input-group select option {
+    padding: 12px;
+    background: #ffffff;
+    color: #333;
+    font-size: 16px;
+}
+
+.input-group select option:checked {
+    background: #667eea;
+    color: white;
+}
+
+.input-group select:hover {
+    border-color: #667eea;
+    background-color: #ffffff;
+}
+
+.input-group select option:disabled {
+    color: #999;
+    background: #f8f9fa;
+}
+
+.back-to-home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+}
+
+.back-to-home a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.back-to-home a:hover {
+    background: #667eea;
+    color: white;
+    transform: translateX(-5px);
+}
+
+.back-to-home i {
+    transition: transform 0.3s ease;
+}
+
+.back-to-home a:hover i {
+    transform: translateX(-5px);
+}
