@@ -33,7 +33,6 @@
                 
                 <div class="form-group">
                     <div class="input-group">
-                        <i class="fas fa-lock"></i>
                         <input type="password" id="password" placeholder="Enter your password" required>
                         <i class="fas fa-eye toggle-password"></i>
                     </div>
@@ -129,7 +128,6 @@
                 </div>
                 <div class="form-group">
                     <div class="input-group">
-                        <i class="fas fa-lock"></i>
                         <input type="password" id="reg-password" placeholder="Create Password" required>
                         <i class="fas fa-eye toggle-password"></i>
                     </div>
@@ -137,7 +135,6 @@
 
                 <div class="form-group">
                     <div class="input-group">
-                        <i class="fas fa-lock"></i>
                         <input type="password" id="confirm-password" placeholder="Confirm Password" required>
                         <i class="fas fa-eye toggle-password"></i>
                     </div>
@@ -221,20 +218,21 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             
-            // Here you would typically verify credentials with your backend
-            // For demo purposes, we'll use a mock student data
-            const mockStudentData = {
-                name: 'John Doe',
-                id: '2023001',
-                section: 'A1',
-                email: email
-            };
-            
-            // Store student data in localStorage
-            localStorage.setItem('studentData', JSON.stringify(mockStudentData));
-            
-            // Redirect to dashboard
-            window.location.href = 'student_dashboard.html';
+            if (email && password) {
+                // Store student data in session storage
+                const studentData = {
+                    name: 'John Doe', 
+                    id: '2023001',    
+                    section: 'A1',     
+                    email: email
+                };
+                sessionStorage.setItem('studentData', JSON.stringify(studentData));
+                
+                // Redirect to dashboard
+                window.location.href = 'student_dashboard.html';
+            } else {
+                alert('Please enter valid credentials');
+            }
         });
 
         document.getElementById('registerForm').addEventListener('submit', function(e) {
@@ -252,26 +250,29 @@
                 alert('Passwords do not match!');
                 return;
             }
-            
-            // Here you would typically send registration data to your backend
-            const studentData = {
-                name: fullname,
-                id: universityRoll,
-                section: section,
-                email: email
-            };
-            
-            // Store student data in localStorage
-            localStorage.setItem('studentData', JSON.stringify(studentData));
-            
-            // Redirect to dashboard
-            window.location.href = 'student_dashboard.html';
+
+            if (fullname && email && universityRoll && classRoll && section && password) {
+                // Show success message
+                alert('Registration successful! Please login with your credentials.');
+                // Clear registration form
+                document.getElementById('registerForm').reset();
+                // Show login form
+                showForm('login-form');
+            } else {
+                alert('Please fill in all fields');
+            }
         });
 
         document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Add your password reset logic here
-            console.log('Forgot password form submitted');
+            const email = document.getElementById('reset-email').value;
+            
+            if (email) {
+                alert('Password reset instructions have been sent to your email');
+                showForm('login-form');
+            } else {
+                alert('Please enter your email address');
+            }
         });
 
         // Add event listeners for all navigation links
