@@ -144,8 +144,58 @@
                         <input type="email" id="profile-email" placeholder="Enter your email">
                     </div>
                     <div class="form-group">
-                        <label for="profile-password">Change Password</label>
-                        <input type="password" id="profile-password" placeholder="Enter new password">
+                        <label for="profile-rollno">Roll Number</label>
+                        <input type="text" id="profile-rollno" placeholder="Enter your roll number">
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-section">Section</label>
+                        <select id="profile-section">
+                            <option value="" disabled selected>Select Section</option>
+                            <option value="A1">A1</option>
+                            <option value="A2">A2</option>
+                            <option value="B1">B1</option>
+                            <option value="B2">B2</option>
+                            <option value="C1">C1</option>
+                            <option value="C2">C2</option>
+                            <option value="D1">D1</option>
+                            <option value="D2">D2</option>
+                            <option value="E1">E1</option>
+                            <option value="E2">E2</option>
+                            <option value="F1">F1</option>
+                            <option value="F2">F2</option>
+                            <option value="G1">G1</option>
+                            <option value="G2">G2</option>
+                            <option value="H1">H1</option>
+                            <option value="H2">H2</option>
+                            <option value="I1">I1</option>
+                            <option value="I2">I2</option>
+                            <option value="J1">J1</option>
+                            <option value="J2">J2</option>
+                            <option value="K1">K1</option>
+                            <option value="K2">K2</option>
+                            <option value="L1">L1</option>
+                            <option value="L2">L2</option>
+                            <option value="M1">M1</option>
+                            <option value="M2">M2</option>
+                            <option value="N1">N1</option>
+                            <option value="N2">N2</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-semester">Semester</label>
+                        <select id="profile-semester">
+                            <option value="" disabled selected>Select Semester</option>
+                            <option value="1">1st Semester</option>
+                            <option value="2">2nd Semester</option>
+                            <option value="3">3rd Semester</option>
+                            <option value="4">4th Semester</option>
+                            <option value="5">5th Semester</option>
+                            <option value="6">6th Semester</option>
+                            <option value="7">7th Semester</option>
+                            <option value="8">8th Semester</option>
+                            <option value="9">9th Semester</option>
+                            <option value="10">10th Semester</option>
+                        </select>
                     </div>
                     <button class="save-profile-btn">
                         <i class="fas fa-save"></i> Save Changes
@@ -172,6 +222,9 @@
         // Update profile form with current data
         document.getElementById('profile-name').value = studentData.name;
         document.getElementById('profile-email').value = studentData.email;
+        document.getElementById('profile-rollno').value = studentData.rollno || '';
+        document.getElementById('profile-section').value = studentData.section || '';
+        document.getElementById('profile-semester').value = studentData.semester || '';
 
         // Navigation functionality
         document.querySelectorAll('.sidebar-nav li').forEach(item => {
@@ -211,26 +264,24 @@
         document.querySelector('.save-profile-btn').addEventListener('click', function() {
             const newName = document.getElementById('profile-name').value;
             const newEmail = document.getElementById('profile-email').value;
-            const newPassword = document.getElementById('profile-password').value;
+            const newRollno = document.getElementById('profile-rollno').value;
+            const newSection = document.getElementById('profile-section').value;
+            const newSemester = document.getElementById('profile-semester').value;
             
             // Update student data
             studentData.name = newName;
             studentData.email = newEmail;
-            
-            // If password is provided, update it
-            if (newPassword) {
-                // Here you would typically update the password in your backend
-                console.log('Password updated');
-            }
+            studentData.rollno = newRollno;
+            studentData.section = newSection;
+            studentData.semester = newSemester;
             
             // Update localStorage
             localStorage.setItem('studentData', JSON.stringify(studentData));
             
             // Update displayed information
             document.getElementById('student-name').textContent = studentData.name;
-            
-            // Clear password field
-            document.getElementById('profile-password').value = '';
+            document.getElementById('student-id').textContent = `ID: ${studentData.rollno}`;
+            document.getElementById('student-section').textContent = `Section: ${studentData.section}`;
             
             alert('Profile changes saved successfully!');
         });
