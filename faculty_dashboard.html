@@ -72,6 +72,10 @@
                             <input type="file" id="file" required>
                             <small class="file-info">Supported formats: PDF, DOC, DOCX, PPT, PPTX</small>
                         </div>
+                        <div class="form-group">
+                            <label for="facultyId">Faculty ID</label>
+                            <input type="text" id="facultyId" required>
+                        </div>
                         <button type="submit" class="upload-btn">
                             <i class="fas fa-upload"></i>
                             Upload Notes
@@ -89,6 +93,36 @@
                         <div class="form-group">
                             <label for="quiz-subject">Subject</label>
                             <input type="text" id="quiz-subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-semester">Semester</label>
+                            <select id="profile-semester">
+                                <option value="" disabled selected>Select Semester</option>
+                                <option value="1">1st Semester</option>
+                                <option value="2">2nd Semester</option>
+                                <option value="3">3rd Semester</option>
+                                <option value="4">4th Semester</option>
+                                <option value="5">5th Semester</option>
+                                <option value="6">6th Semester</option>
+                                <option value="7">7th Semester</option>
+                                <option value="8">8th Semester</option>
+                                <option value="9">9th Semester</option>
+                                <option value="10">10th Semester</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="department">Department</label>
+                            <select id="department" required>
+                                <option value="" disabled selected>Select Department</option>
+                                <option value="btech">B.Tech</option>
+                                <option value="mtech">M.Tech</option>
+                                <option value="bca">BCA</option>
+                                <option value="mca">MCA</option>
+                                <option value="bba">BBA</option>
+                                <option value="mba">MBA</option>
+                                <option value="bcom">B.Com</option>
+                                <option value="mcom">M.Com</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="quiz-section">Section</label>
@@ -135,14 +169,6 @@
                                     <input type="number" id="hours" min="0" max="23" value="0">
                                     <span>:</span>
                                     <input type="number" id="minutes" min="0" max="59" value="0">
-                                </div>
-                                <div class="time-controls">
-                                    <button type="button" class="time-btn" data-action="increment">
-                                        <i class="fas fa-chevron-up"></i>
-                                    </button>
-                                    <button type="button" class="time-btn" data-action="decrement">
-                                        <i class="fas fa-chevron-down"></i>
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -338,7 +364,7 @@
                                 </div>
                             </div>
                             <div class="feedback-content">
-                                <p>"The teacher explains concepts very clearly and provides helpful examples. The notes are well-organized and easy to understand."</p>
+                               
                             </div>
                         </div>
 
@@ -361,7 +387,7 @@
                                 </div>
                             </div>
                             <div class="feedback-content">
-                                <p>"The practical demonstrations in class are very helpful. Would appreciate more interactive sessions."</p>
+                                
                             </div>
                         </div>
 
@@ -384,7 +410,7 @@
                                 </div>
                             </div>
                             <div class="feedback-content">
-                                <p>"Great teaching methodology. The assignments are challenging but help in better understanding of the subject."</p>
+                                
                             </div>
                         </div>
                     </div>
@@ -508,10 +534,32 @@
         });
 
         // Form Submissions
-        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            // Add your upload logic here
-            alert('Notes uploaded successfully!');
+            
+            const formData = new FormData();
+            formData.append('subject', document.getElementById('subject').value);
+            formData.append('topic', document.getElementById('topic').value);
+            formData.append('description', document.getElementById('description').value);
+            formData.append('file', document.getElementById('file').files[0]);
+            formData.append('facultyId', document.getElementById('facultyId').value);
+
+            try {
+                const response = await fetch('http://localhost:5000/api/upload-notes', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                if (data.success) {
+                    alert('Notes uploaded successfully!');
+                    // Clear form
+                    this.reset();
+                } else {
+                    alert('Error uploading notes: ' + data.message);
+                }
+            } catch (error) {
+                alert('Error uploading notes: ' + error.message);
+            }
         });
 
         document.getElementById('quizForm').addEventListener('submit', function(e) {

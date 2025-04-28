@@ -42,7 +42,6 @@
                 </ul>
             </nav>
         </div>
-
         <!-- Main Content -->
         <div class="main-content">
             <!-- Notes Section -->
@@ -72,7 +71,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- More note cards can be added here -->
                 </div>
             </div>
 
@@ -96,7 +94,6 @@
                             <i class="fas fa-play"></i> Start Quiz
                         </button>
                     </div>
-                    <!-- More quiz cards can be added here -->
                 </div>
             </div>
 
@@ -114,10 +111,6 @@
                             <option value="2">Prof. Johnson</option>
                             <option value="3">Ms. Williams</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="feedback-subject">Subject</label>
-                        <input type="text" id="feedback-subject" placeholder="Enter subject">
                     </div>
                     <div class="form-group">
                         <label for="feedback-message">Your Feedback</label>
@@ -206,7 +199,6 @@
     </div>
 
     <script>
-        // Get student data from localStorage (assuming it was stored during login)
         const studentData = JSON.parse(localStorage.getItem('studentData')) || {
             name: 'Student Name',
             id: '123456',
@@ -214,12 +206,10 @@
             email: 'student@example.com'
         };
 
-        // Update profile information
         document.getElementById('student-name').textContent = studentData.name;
         document.getElementById('student-id').textContent = `ID: ${studentData.id}`;
         document.getElementById('student-section').textContent = `Section: ${studentData.section}`;
 
-        // Update profile form with current data
         document.getElementById('profile-name').value = studentData.name;
         document.getElementById('profile-email').value = studentData.email;
         document.getElementById('profile-rollno').value = studentData.rollno || '';
@@ -229,23 +219,20 @@
         // Navigation functionality
         document.querySelectorAll('.sidebar-nav li').forEach(item => {
             item.addEventListener('click', function() {
-                // Remove active class from all nav items
+            
                 document.querySelectorAll('.sidebar-nav li').forEach(li => li.classList.remove('active'));
-                // Add active class to clicked item
+            
                 this.classList.add('active');
                 
-                // Hide all sections
                 document.querySelectorAll('.content-section').forEach(section => {
                     section.classList.remove('active');
                 });
                 
-                // Show selected section
                 const sectionId = this.getAttribute('data-section') + '-section';
                 document.getElementById(sectionId).classList.add('active');
             });
         });
 
-        // Form submission handlers
         document.querySelector('.submit-feedback-btn').addEventListener('click', function() {
             const teacher = document.getElementById('teacher-select').value;
             const subject = document.getElementById('feedback-subject').value;
@@ -256,7 +243,6 @@
                 return;
             }
             
-            // Here you would typically send the feedback to your backend
             console.log('Feedback submitted:', { teacher, subject, message });
             alert('Feedback submitted successfully!');
         });
