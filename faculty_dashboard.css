@@ -163,6 +163,7 @@ input:focus, select:focus {
     box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.1);
     outline: none;
 }
+
 /* Upload Notes Section */
 .upload-container {
     margin-top: 10px;
@@ -1093,4 +1094,26 @@ input[type="file"]:hover {
     .feedback-summary .summary-content p {
         font-size: 1.2rem;
     }
+}
+
+/* Subject Selection Styles */
+#subject-department optgroup {
+    font-weight: 600;
+    color: #1a237e;
+    padding: 8px 0;
+}
+
+#subject-department optgroup option {
+    font-weight: normal;
+    color: #333;
+    padding: 8px 15px;
+}
+
+#subject-department optgroup[style*="display: none"] {
+    display: none !important;
+}
+
+#subject-department option:disabled {
+    color: #999;
+    background: #f8f9fa;
 } 

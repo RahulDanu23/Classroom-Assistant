@@ -56,8 +56,66 @@
                 <div class="upload-container">
                     <form id="uploadForm" class="upload-form">
                         <div class="form-group">
+                            <label for="profile-department">Department</label>
+                            <select id="profile-department" required>
+                                <option value="" disabled selected>Select Department</option>
+                                <option value="btech">B.Tech</option>
+                                <option value="mtech">M.Tech</option>
+                                <option value="bca">BCA</option>
+                                <option value="mca">MCA</option>
+                                <option value="bba">BBA</option>
+                                <option value="mba">MBA</option>
+                                <option value="bcom">B.Com</option>
+                                <option value="mcom">M.Com</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="department-type">Department Type</label>
+                            <select id="department-type" required>
+                                <option value="" disabled selected>Select Department Type</option>
+                                <option value="core">Core</option>
+                                <option value="aiml">AI-ML</option>
+                                <option value="cyber">Cyber Security</option>
+                                <option value="aids">AI-DS</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="subject">Subject</label>
-                            <input type="text" id="subject" required>
+                            <select id="subject-department" required>
+                                <option value="" disabled selected>Select Subject</option>
+                                <!-- Core Subjects -->
+                                <optgroup label="Core Subjects" id="core-subjects">
+                                    <option value="Microprocessor">Microprocessor</option>
+                                    <option value="DAA">Design Analysis and Algorithms(DAA)</option>
+                                    <option value="Java Programming">Java Programming</option>
+                                    <option value="Finite Automata">Finite Automata</option>
+                                    <option value="Career Skills">Career Skills</option>
+                                </optgroup>
+                                <!-- AI-ML Subjects -->
+                                <optgroup label="AI-ML Subjects" id="aiml-subjects">
+                                    <option value="Deep Learning">Deep Learning</option>
+                                    <option value="Machine Learning">Machine Learning</option>
+                                    <option value="Neural Networks">Neural Networks</option>
+                                    <option value="Computer Vision">Computer Vision</option>
+                                    <option value="Natural Language Processing">Natural Language Processing</option>
+                                </optgroup>
+                                <!-- Cyber Security Subjects -->
+                                <optgroup label="Cyber Security Subjects" id="cyber-subjects">
+                                    <option value="Network Security">Network Security</option>
+                                    <option value="Cryptography">Cryptography</option>
+                                    <option value="Ethical Hacking">Ethical Hacking</option>
+                                    <option value="Digital Forensics">Digital Forensics</option>
+                                    <option value="Information Security">Information Security</option>
+                                </optgroup>
+                                <!-- AI-DS Subjects -->
+                                <optgroup label="AI-DS Subjects" id="aids-subjects">
+                                    <option value="Data Mining">Data Mining</option>
+                                    <option value="Statistical Analysis">Statistical Analysis</option>
+                                    <option value="Big Data Analytics">Big Data Analytics</option>
+                                    <option value="Predictive Modeling">Predictive Modeling</option>
+                                    <option value="Data Visualization">Data Visualization</option>
+                                </optgroup>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="topic">Topic</label>
@@ -71,10 +129,6 @@
                             <label for="file">Upload File</label>
                             <input type="file" id="file" required>
                             <small class="file-info">Supported formats: PDF, DOC, DOCX, PPT, PPTX</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="facultyId">Faculty ID</label>
-                            <input type="text" id="facultyId" required>
                         </div>
                         <button type="submit" class="upload-btn">
                             <i class="fas fa-upload"></i>
@@ -498,6 +552,46 @@
                 const sectionId = this.getAttribute('data-section');
                 document.getElementById(sectionId).classList.add('active');
             });
+        });
+
+        // Handle department type selection
+        document.getElementById('department-type').addEventListener('change', function() {
+            const coreSubjects = document.getElementById('core-subjects');
+            const aimlSubjects = document.getElementById('aiml-subjects');
+            const cyberSubjects = document.getElementById('cyber-subjects');
+            const aidsSubjects = document.getElementById('aids-subjects');
+            const selectedType = this.value;
+
+            // Reset subject selection
+            document.getElementById('subject-department').value = '';
+
+            // Hide all subject groups first
+            [coreSubjects, aimlSubjects, cyberSubjects, aidsSubjects].forEach(group => {
+                if (group) {
+                    group.style.display = 'none';
+                    group.querySelectorAll('option').forEach(opt => opt.disabled = true);
+                }
+            });
+
+            // Show and enable the selected department's subjects
+            switch(selectedType) {
+                case 'core':
+                    coreSubjects.style.display = 'block';
+                    coreSubjects.querySelectorAll('option').forEach(opt => opt.disabled = false);
+                    break;
+                case 'aiml':
+                    aimlSubjects.style.display = 'block';
+                    aimlSubjects.querySelectorAll('option').forEach(opt => opt.disabled = false);
+                    break;
+                case 'cyber':
+                    cyberSubjects.style.display = 'block';
+                    cyberSubjects.querySelectorAll('option').forEach(opt => opt.disabled = false);
+                    break;
+                case 'aids':
+                    aidsSubjects.style.display = 'block';
+                    aidsSubjects.querySelectorAll('option').forEach(opt => opt.disabled = false);
+                    break;
+            }
         });
 
         // Add Question Button
