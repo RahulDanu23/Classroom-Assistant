@@ -101,15 +101,16 @@
                                 <option value="" disabled selected>Select Subject</option>
                                 <!-- Core Subjects -->
                                 <optgroup label="Core Subjects" id="core-subjects">
-                                    <option value="Microprocessor">Microprocessor</option>
-                                    <option value="DAA">Design Analysis and Algorithms(DAA)</option>
-                                    <option value="Java Programming">Java Programming</option>
-                                    <option value="Finite Automata">Finite Automata</option>
-                                    <option value="Career Skills">Career Skills</option>
+                                <option value="Microprocessor">Microprocessor</option>
+                                <option value="DAA">Design Analysis and Algorithms(DAA)</option>
+                                <option value="Java Programming">Java Programming</option>
+                                <option value="Finite Automata">Finite Automata</option>
+                                <option value="Career Skills">Career Skills</option>
                                 </optgroup>
                                 <!-- AI-ML Subjects -->
                                 <optgroup label="AI-ML Subjects" id="aiml-subjects">
-                                    <option value="Deep Learning">Deep Learning</option>
+                                <option value="Deep Learning">Deep Learning</option>
+                                <option value="DAA">Design Analysis and Algorithms(DAA)</option>
                                     <option value="Machine Learning">Machine Learning</option>
                                     <option value="Neural Networks">Neural Networks</option>
                                     <option value="Computer Vision">Computer Vision</option>
@@ -117,6 +118,7 @@
                                 </optgroup>
                                 <!-- Cyber Security Subjects -->
                                 <optgroup label="Cyber Security Subjects" id="cyber-subjects">
+                                    <option value="DAA">Design Analysis and Algorithms(DAA)</option>
                                     <option value="Network Security">Network Security</option>
                                     <option value="Cryptography">Cryptography</option>
                                     <option value="Ethical Hacking">Ethical Hacking</option>
@@ -126,6 +128,7 @@
                                 <!-- AI-DS Subjects -->
                                 <optgroup label="AI-DS Subjects" id="aids-subjects">
                                     <option value="Data Mining">Data Mining</option>
+                                    <option value="DAA">Design Analysis and Algorithms(DAA)</option>
                                     <option value="Statistical Analysis">Statistical Analysis</option>
                                     <option value="Big Data Analytics">Big Data Analytics</option>
                                     <option value="Predictive Modeling">Predictive Modeling</option>
@@ -137,10 +140,10 @@
                             <label for="topic">Topic</label>
                             <input type="text" id="topic" required placeholder="Enter topic name">
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="description">Description</label>
                             <textarea id="description" rows="3" placeholder="Add a brief description of the notes"></textarea>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label for="file">Upload File</label>
                             <input type="file" id="file" required>
@@ -152,11 +155,19 @@
                         </button>
                     </form>
                 </div>
+                
+                <!-- Notes List Section -->
+                <div class="notes-list-container">
+                    <h3>Uploaded Notes</h3>
+                    <div class="notes-grid" id="faculty-notes-grid">
+                        <!-- Notes will be populated dynamically -->
+                    </div>
+                </div>
             </section>
 
             <!-- Generate Quiz Section -->
             <section id="generate-quiz" class="content-section">
-                <h2 style="text-align: center;" > Generate Quiz</h2>
+                <h2 style="text-align: center;">Generate Quiz</h2>
                 <br>
                 <div class="quiz-container">
                     <form id="quizForm" class="quiz-form">
@@ -555,167 +566,6 @@
         </div>
     </div>
 
-    <script>
-        // Navigation
-        document.querySelectorAll('.sidebar li').forEach(item => {
-            item.addEventListener('click', function() {
-                // Remove active class from all items
-                document.querySelectorAll('.sidebar li').forEach(li => li.classList.remove('active'));
-                document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
-                
-                // Add active class to clicked item
-                this.classList.add('active');
-                const sectionId = this.getAttribute('data-section');
-                document.getElementById(sectionId).classList.add('active');
-            });
-        });
-
-        // Handle department type selection
-        document.getElementById('department-type').addEventListener('change', function() {
-            const coreSubjects = document.getElementById('core-subjects');
-            const aimlSubjects = document.getElementById('aiml-subjects');
-            const cyberSubjects = document.getElementById('cyber-subjects');
-            const aidsSubjects = document.getElementById('aids-subjects');
-            const selectedType = this.value;
-
-            // Reset subject selection
-            document.getElementById('subject-department').value = '';
-
-            // Hide all subject groups first
-            [coreSubjects, aimlSubjects, cyberSubjects, aidsSubjects].forEach(group => {
-                if (group) {
-                    group.style.display = 'none';
-                    group.querySelectorAll('option').forEach(opt => opt.disabled = true);
-                }
-            });
-
-            // Show and enable the selected department's subjects
-            switch(selectedType) {
-                case 'core':
-                    coreSubjects.style.display = 'block';
-                    coreSubjects.querySelectorAll('option').forEach(opt => opt.disabled = false);
-                    break;
-                case 'aiml':
-                    aimlSubjects.style.display = 'block';
-                    aimlSubjects.querySelectorAll('option').forEach(opt => opt.disabled = false);
-                    break;
-                case 'cyber':
-                    cyberSubjects.style.display = 'block';
-                    cyberSubjects.querySelectorAll('option').forEach(opt => opt.disabled = false);
-                    break;
-                case 'aids':
-                    aidsSubjects.style.display = 'block';
-                    aidsSubjects.querySelectorAll('option').forEach(opt => opt.disabled = false);
-                    break;
-            }
-        });
-
-        // Add Question Button
-        document.querySelector('.add-question-btn').addEventListener('click', function() {
-            const questionsContainer = document.querySelector('.questions-container');
-            const questionCount = questionsContainer.children.length + 1;
-            
-            const newQuestion = document.createElement('div');
-            newQuestion.className = 'question';
-            newQuestion.innerHTML = `
-                <div class="form-group">
-                    <label>Question ${questionCount}</label>
-                    <input type="text" placeholder="Enter question" required>
-                </div>
-                <div class="options">
-                    <input type="text" placeholder="Option A" required>
-                    <input type="text" placeholder="Option B" required>
-                    <input type="text" placeholder="Option C" required>
-                    <input type="text" placeholder="Option D" required>
-                </div>
-                <div class="form-group">
-                    <label>Correct Answer</label>
-                    <select required>
-                        <option value="">Select correct option</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                    </select>
-                </div>
-            `;
-            
-            questionsContainer.appendChild(newQuestion);
-        });
-
-        // Form Submissions
-        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData();
-            formData.append('subject', document.getElementById('subject').value);
-            formData.append('topic', document.getElementById('topic').value);
-            formData.append('description', document.getElementById('description').value);
-            formData.append('file', document.getElementById('file').files[0]);
-            formData.append('facultyId', document.getElementById('facultyId').value);
-
-            try {
-                const response = await fetch('http://localhost:5000/api/upload-notes', {
-                    method: 'POST',
-                    body: formData
-                });
-                const data = await response.json();
-                if (data.success) {
-                    alert('Notes uploaded successfully!');
-                    // Clear form
-                    this.reset();
-                } else {
-                    alert('Error uploading notes: ' + data.message);
-                }
-            } catch (error) {
-                alert('Error uploading notes: ' + error.message);
-            }
-        });
-
-        document.getElementById('quizForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Add your quiz generation logic here
-            alert('Quiz generated successfully!');
-        });
-
-        document.getElementById('profileForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Add your profile update logic here
-            alert('Profile updated successfully!');
-        });
-
-        // Time Picker Functionality
-        document.querySelectorAll('.time-input input').forEach(input => {
-            input.addEventListener('change', function() {
-                if (this.id === 'hours') {
-                    this.value = Math.min(23, Math.max(0, parseInt(this.value) || 0));
-                } else {
-                    this.value = Math.min(59, Math.max(0, parseInt(this.value) || 0));
-                }
-            });
-        });
-
-        document.querySelectorAll('.time-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const action = this.getAttribute('data-action');
-                const input = this.closest('.time-picker').querySelector('input');
-                const currentValue = parseInt(input.value) || 0;
-                
-                if (action === 'increment') {
-                    if (input.id === 'hours') {
-                        input.value = Math.min(23, currentValue + 1);
-                    } else {
-                        input.value = Math.min(59, currentValue + 1);
-                    }
-                } else {
-                    if (input.id === 'hours') {
-                        input.value = Math.max(0, currentValue - 1);
-                    } else {
-                        input.value = Math.max(0, currentValue - 1);
-                    }
-                }
-            });
-        });
-    </script>
+    <script src="faculty_dashboard.js"></script>
 </body>
 </html> 

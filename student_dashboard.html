@@ -49,29 +49,82 @@
                 <div class="section-header">
                     <h2>Study Notes</h2>
                     <div class="search-bar">
-                        <input type="text" placeholder="Search notes...">
+                        <input type="text" id="notes-search" placeholder="Search notes...">
                         <i class="fas fa-search"></i>
                     </div>
                 </div>
-                <div class="notes-grid">
-                    <div class="note-card">
-                        <div class="note-header">
-                            <h3>Mathematics</h3>
-                            <span class="date">Posted: 2 days ago</span>
-                        </div>
-                        <div class="note-content">
-                            <p>Chapter 3: Calculus Basics</p>
-                            <div class="note-actions">
-                                <button class="download-btn">
-                                    <i class="fas fa-download"></i> Download
-                                </button>
-                                <button class="view-btn">
-                                    <i class="fas fa-eye"></i> View
-                                </button>
-                            </div>
-                        </div>
+                <div class="notes-filters">
+                    <div class="filter-group">
+                        <label for="notes-department">Department Type</label>
+                        <select id="notes-department" required>
+                            <option value="" selected disabled>Select Department Type</option>
+                            <option value="core">Core</option>
+                            <option value="aiml">AI-ML</option>
+                            <option value="cyber">Cyber Security</option>
+                            <option value="aids">AI-DS</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="notes-semester">Semester</label>
+                        <select id="notes-semester" required>
+                            <option value="" selected disabled>Select Semester</option>
+                            <option value="1">1st Semester</option>
+                            <option value="2">2nd Semester</option>
+                            <option value="3">3rd Semester</option>
+                            <option value="4">4th Semester</option>
+                            <option value="5">5th Semester</option>
+                            <option value="6">6th Semester</option>
+                            <option value="7">7th Semester</option>
+                            <option value="8">8th Semester</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="subject-department">Subject</label>
+                        <select id="subject-department" required>
+                            <option value="" selected disabled>Select Subject</option>
+                            <!-- Core Subjects -->
+                            <optgroup label="Core Subjects" id="core-subjects" style="display: none;">
+                                <option value="Microprocessor" disabled>Microprocessor</option>
+                                <option value="DAA" disabled>Design Analysis and Algorithms(DAA)</option>
+                                <option value="Java Programming" disabled>Java Programming</option>
+                                <option value="Finite Automata" disabled>Finite Automata</option>
+                                <option value="Career Skills" disabled>Career Skills</option>
+                            </optgroup>
+                            <!-- AI-ML Subjects -->
+                            <optgroup label="AI-ML Subjects" id="aiml-subjects" style="display: none;">
+                                <option value="Deep Learning" disabled>Deep Learning</option>
+                                <option value="DAA" disabled>Design Analysis and Algorithms(DAA)</option>
+                                <option value="Machine Learning" disabled>Machine Learning</option>
+                                <option value="Neural Networks" disabled>Neural Networks</option>
+                                <option value="Computer Vision" disabled>Computer Vision</option>
+                                <option value="Natural Language Processing" disabled>Natural Language Processing</option>
+                            </optgroup>
+                            <!-- Cyber Security Subjects -->
+                            <optgroup label="Cyber Security Subjects" id="cyber-subjects" style="display: none;">
+                                <option value="DAA" disabled>Design Analysis and Algorithms(DAA)</option>
+                                <option value="Network Security" disabled>Network Security</option>
+                                <option value="Cryptography" disabled>Cryptography</option>
+                                <option value="Ethical Hacking" disabled>Ethical Hacking</option>
+                                <option value="Digital Forensics" disabled>Digital Forensics</option>
+                                <option value="Information Security" disabled>Information Security</option>
+                            </optgroup>
+                            <!-- AI-DS Subjects -->
+                            <optgroup label="AI-DS Subjects" id="aids-subjects" style="display: none;">
+                                <option value="Data Mining" disabled>Data Mining</option>
+                                <option value="DAA" disabled>Design Analysis and Algorithms(DAA)</option>
+                                <option value="Statistical Analysis" disabled>Statistical Analysis</option>
+                                <option value="Big Data Analytics" disabled>Big Data Analytics</option>
+                                <option value="Predictive Modeling" disabled>Predictive Modeling</option>
+                                <option value="Data Visualization" disabled>Data Visualization</option>
+                            </optgroup>
+                        </select>
                     </div>
                 </div>
+                <div id="select-filters-message" class="select-filters-message">
+                    <i class="fas fa-filter"></i>
+                    <p>Please select department, semester, and subject to view notes</p>
+                </div>
+                <div class="notes-grid" id="notes-grid"></div>
             </div>
 
             <!-- Quizzes Section -->
@@ -198,93 +251,30 @@
         </div>
     </div>
 
-    <script>
-        const studentData = JSON.parse(localStorage.getItem('studentData')) || {
-            name: 'Student Name',
-            id: '123456',
-            section: 'A1',
-            email: 'student@example.com'
-        };
+    <!-- Notes Viewer Modal -->
+    <div id="notes-viewer-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title"></h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="note-metadata">
+                    <span id="modal-subject"></span>
+                    <span id="modal-department"></span>
+                    <span id="modal-semester"></span>
+                </div>
+                <div class="note-content-viewer">
+                    <iframe id="note-viewer-frame"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        document.getElementById('student-name').textContent = studentData.name;
-        document.getElementById('student-id').textContent = `ID: ${studentData.id}`;
-        document.getElementById('student-section').textContent = `Section: ${studentData.section}`;
+    <style>
+    
+    </style>
 
-        document.getElementById('profile-name').value = studentData.name;
-        document.getElementById('profile-email').value = studentData.email;
-        document.getElementById('profile-rollno').value = studentData.rollno || '';
-        document.getElementById('profile-section').value = studentData.section || '';
-        document.getElementById('profile-semester').value = studentData.semester || '';
-
-        // Navigation functionality
-        document.querySelectorAll('.sidebar-nav li').forEach(item => {
-            item.addEventListener('click', function() {
-            
-                document.querySelectorAll('.sidebar-nav li').forEach(li => li.classList.remove('active'));
-            
-                this.classList.add('active');
-                
-                document.querySelectorAll('.content-section').forEach(section => {
-                    section.classList.remove('active');
-                });
-                
-                const sectionId = this.getAttribute('data-section') + '-section';
-                document.getElementById(sectionId).classList.add('active');
-            });
-        });
-
-        document.querySelector('.submit-feedback-btn').addEventListener('click', function() {
-            const teacher = document.getElementById('teacher-select').value;
-            const subject = document.getElementById('feedback-subject').value;
-            const message = document.getElementById('feedback-message').value;
-            
-            if (!teacher || !subject || !message) {
-                alert('Please fill in all fields');
-                return;
-            }
-            
-            console.log('Feedback submitted:', { teacher, subject, message });
-            alert('Feedback submitted successfully!');
-        });
-
-        document.querySelector('.save-profile-btn').addEventListener('click', function() {
-            const newName = document.getElementById('profile-name').value;
-            const newEmail = document.getElementById('profile-email').value;
-            const newRollno = document.getElementById('profile-rollno').value;
-            const newSection = document.getElementById('profile-section').value;
-            const newSemester = document.getElementById('profile-semester').value;
-            
-            // Update student data
-            studentData.name = newName;
-            studentData.email = newEmail;
-            studentData.rollno = newRollno;
-            studentData.section = newSection;
-            studentData.semester = newSemester;
-            
-            // Update localStorage
-            localStorage.setItem('studentData', JSON.stringify(studentData));
-            
-            // Update displayed information
-            document.getElementById('student-name').textContent = studentData.name;
-            document.getElementById('student-id').textContent = `ID: ${studentData.rollno}`;
-            document.getElementById('student-section').textContent = `Section: ${studentData.section}`;
-            
-            alert('Profile changes saved successfully!');
-        });
-
-        // Add logout functionality
-        const logoutBtn = document.createElement('li');
-        logoutBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i><span>Logout</span>';
-        logoutBtn.style.marginTop = '20px';
-        logoutBtn.style.borderTop = '1px solid rgba(255, 255, 255, 0.1)';
-        logoutBtn.style.paddingTop = '20px';
-        logoutBtn.addEventListener('click', function() {
-            // Clear student data from localStorage
-            localStorage.removeItem('studentData');
-            // Redirect to login page
-            window.location.href = 'student_login.html';
-        });
-        document.querySelector('.sidebar-nav ul').appendChild(logoutBtn);
-    </script>
+    <script src="student_dashboard.js"></script>
 </body>
 </html> 

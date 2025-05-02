@@ -170,11 +170,13 @@ body {
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0;
 }
 
 .note-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 .note-header {
@@ -182,6 +184,8 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
 }
 
 .note-header h3 {
@@ -202,17 +206,21 @@ body {
 .note-actions {
     display: flex;
     gap: 10px;
+    margin-top: 15px;
 }
 
 .note-actions button {
-    padding: 8px 15px;
+    flex: 1;
+    padding: 10px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 5px;
+    font-weight: 500;
 }
 
 .download-btn {
@@ -220,9 +228,17 @@ body {
     color: white;
 }
 
+.download-btn:hover {
+    background: #5a6fd6;
+}
+
 .view-btn {
     background: #f0f0f0;
     color: #333;
+}
+
+.view-btn:hover {
+    background: #e0e0e0;
 }
 
 /* Quizzes Grid */
@@ -503,4 +519,332 @@ body {
     .quizzes-grid {
         grid-template-columns: 1fr;
     }
+
+    .notes-filters {
+        flex-direction: column;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .note-info {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+/* Notes Filters */
+.notes-filters {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.filter-group {
+    position: relative;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: #1a237e;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #333;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23667eea' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 15px;
+    padding-right: 40px;
+}
+
+.filter-group select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    outline: none;
+}
+
+.filter-group select:hover {
+    border-color: #667eea;
+}
+
+/* Select Filters Message */
+.select-filters-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    gap: 15px;
+}
+
+.select-filters-message i {
+    font-size: 48px;
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.select-filters-message p {
+    color: #1a237e;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* Note Cards */
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 10px;
+}
+
+.note-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+}
+
+.note-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.note-header {
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: #f8f9fa;
+}
+
+.note-title {
+    flex: 1;
+}
+
+.note-title h3 {
+    color: #1a237e;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.department-badge {
+    background: #667eea;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.semester-badge {
+    background: #4CAF50;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.note-content {
+    padding: 20px;
+}
+
+.note-content h4 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.note-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 15px 0;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.note-info span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    font-size: 13px;
+}
+
+.note-info i {
+    color: #667eea;
+}
+
+.note-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.note-actions button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.download-btn {
+    background: #667eea;
+    color: white;
+}
+
+.download-btn:hover {
+    background: #5a6fd6;
+}
+
+.view-btn {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.view-btn:hover {
+    background: #e0e0e0;
+}
+
+/* No Notes Message */
+.no-notes-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.no-notes-message i {
+    font-size: 48px;
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+.no-notes-message p {
+    color: #1a237e;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.no-notes-message .sub-text {
+    color: #666;
+    font-size: 14px;
 } 
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 2% auto;
+    padding: 0;
+    width: 90%;
+    height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #333;
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #333;
+}
+
+.modal-body {
+    padding: 20px;
+    height: calc(100% - 70px);
+}
+
+.note-metadata {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 15px;
+}
+
+.note-metadata span {
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    font-size: 14px;
+}
+
+.note-content-viewer {
+    height: calc(100% - 50px);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#note-viewer-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
